@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
+use Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +29,16 @@ require __DIR__.'/auth.php';
 
 Route::get('/', function() {
     return view('home-view');
-});
+})->name('home');
 
-Route::get('/about', function() {
+Route::get('/about/', function() {
     return view('about');
-});
+})->name('about');
 
-Route::get('/contact', function() {
+Route::get('/contact/', function() {
     return view('contact');
-});
+})->name('contact');
 
-Route::post('/contact/submit', function() {
-    return 'form ok';
-});
+Route::post('/contact/submit/', function() {
+    return dd(Request::all());
+})->name('contact-form');
