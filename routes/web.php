@@ -27,6 +27,8 @@ require __DIR__.'/auth.php';
 // Route::get('/good/{id}/', [GoodController::class, 'good'])->name('good');
 // Route::get('/category/{id}/', [GoodController::class, 'category'])->name('category');
 
+
+
 Route::get('/', function() {
     return view('home-view');
 })->name('home');
@@ -39,5 +41,9 @@ Route::get('/contact/', function() {
     return view('contact');
 })->name('contact');
 
+Route::get('/contact/all/{id}', [ContactController::class, 'showOneMessage'])->name('contact-data-one');
+Route::get('/contact/all/{id}/update/', [ContactController::class, 'updateMessage'])->name('contact-update');
+Route::get('/contact/all/{id}/delete/', [ContactController::class, 'deleteMessage'])->name('contact-delete');
 Route::get('/contact/all/', [ContactController::class, 'allData'])->name('contact-all');
+Route::post('/contact/all/{id}/update/', [ContactController::class, 'updateMessageSubmit'])->name('contact-update-submit');
 Route::post('/contact/submit/', [ContactController::class, 'submit'])->name('contact-form');

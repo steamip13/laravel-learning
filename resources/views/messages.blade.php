@@ -9,7 +9,7 @@
         <h3>{{ $element->subject }}</h3>
         <p>{{ $element->name }}</p>
         <p><small>{{ $element->email }}</small></p>
-        <a href="#"><button class="btn btn-warning">Детальнее</button></a>
+        <a href="{{ route('contact-data-one', $element->id) }}"><button class="btn btn-warning">Детальнее</button></a>
     </div>
    @endforeach
 @endsection
