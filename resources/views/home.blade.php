@@ -5,7 +5,7 @@
   <div class="content-head__container">
     <div class="content-head__title-wrap">
       @if (isset($category_id))
-        <div class="content-head__title-wrap__title bcg-title">Товары в категории {{ $currentCategory -> title}} </div>
+        <div class="content-head__title-wrap__title bcg-title">Игры в категории {{ $currentCategory -> title}} </div>
       @else
         <div class="content-head__title-wrap__title bcg-title">Последние товары</div>
       @endif

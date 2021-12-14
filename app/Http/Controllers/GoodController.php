@@ -33,13 +33,4 @@ class GoodController extends Controller
             'currentCategory' => Category::find($id)
         ]);
     }
-
-    public function about()
-    {
-        $goods = Good::inRandomOrder()->limit(3)->get();
-        // dd(Good::all()->random());
-        return view('layouts.about',[
-            'goods' => $goods,
-        ]);
-    }
 }

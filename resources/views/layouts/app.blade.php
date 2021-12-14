@@ -15,11 +15,11 @@
       <div class="middle">
         <div class="sidebar">
           @include('layouts.categories')
-          @include('layouts.news')
+          @include('layouts.news-left-sidebar')
         </div>
         <div class="main-content">
           <div class="content-top">
-            <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
+            <h3 class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</h3>
             <div class="slider"><img src="/img/slider.png" alt="Image" class="image-main"></div>
           </div>
           @yield('content')
