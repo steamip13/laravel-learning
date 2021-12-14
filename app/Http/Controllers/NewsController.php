@@ -14,4 +14,12 @@ class NewsController extends Controller
             'news' => $news,
         ]);
     }
+
+    public function detail($id)
+    {
+        $news = News::find($id);
+        return view('layouts.news-detail', [
+            'news' => $news,
+        ]);
+    }
 }

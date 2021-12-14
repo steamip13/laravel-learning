@@ -33,4 +33,9 @@ class GoodController extends Controller
             'currentCategory' => Category::find($id)
         ]);
     }
+
+    public function about()
+    {
+        return view('layouts.about');
+    }
 }

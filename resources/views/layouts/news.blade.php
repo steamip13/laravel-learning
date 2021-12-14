@@ -27,7 +27,7 @@
                 {{ $element->description}}
               </div>
             </div>
-            <div class="news-list__item__content__news-btn-wrap"><a href="#" class="btn btn-brown">Подробнее</a></div>
+            <div class="news-list__item__content__news-btn-wrap"><a href="{{ route('news-detail', $element->id) }}" class="btn btn-brown">Подробнее</a></div>
           </div>
         @endforeach
       </div>

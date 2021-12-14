@@ -28,6 +28,7 @@ Route::get('/good/{id}/', [GoodController::class, 'good'])->name('good');
 Route::get('/category/{id}/', [GoodController::class, 'category'])->name('category');
 Route::get('/about/', [GoodController::class, 'about'])->name('about');
 Route::get('/news/', [NewsController::class, 'news'])->name('news');
+Route::get('/news/{id}/', [NewsController::class, 'detail'])->name('news-detail');
 
 // Роуты второго курса
 // Route::get('/', function() {

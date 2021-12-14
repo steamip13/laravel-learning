@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.footer', function ($view) {
             $view->with(['randomGood' => Good::all()->random()]);
         });
-        view()->composer(['layouts.about', 'layouts.good'], function ($view) {
+        view()->composer(['layouts.about', 'layouts.good', 'layouts.news-detail'], function ($view) {
             $view->with(['goodsView' => Good::inRandomOrder()->limit(3)->get()]);
         });
         view()->composer('layouts.news-left-sidebar', function ($view) {
