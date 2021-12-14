@@ -10,7 +10,7 @@ class GoodController extends Controller
 {
     public function index()
     {
-        $goods = Good::query()->get();
+        $goods = Good::query()->orderBy('id', 'DESC')->paginate(6);
         return view('home',[
             'goods' => $goods,
         ]);
@@ -26,7 +26,7 @@ class GoodController extends Controller
 
     public function category(int $id)
     {
-        $goods = Good::query()->with('category')->where('category_id', '=', $id)->get();
+        $goods = Good::query()->with('category')->where('category_id', '=', $id)->paginate(6);
         $goods_test = Good::all();
         return view('home',[
             'goods' => $goods,
