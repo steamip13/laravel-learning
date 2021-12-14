@@ -27,11 +27,19 @@ class GoodController extends Controller
     public function category(int $id)
     {
         $goods = Good::query()->with('category')->where('category_id', '=', $id)->paginate(6);
-        $goods_test = Good::all();
         return view('home',[
             'goods' => $goods,
             'category_id' => $id,
             'currentCategory' => Category::find($id)
+        ]);
+    }
+
+    public function about()
+    {
+        $goods = Good::inRandomOrder()->limit(3)->get();
+        // dd(Good::all()->random());
+        return view('layouts.about',[
+            'goods' => $goods,
         ]);
     }
 }

@@ -26,7 +26,7 @@ require __DIR__.'/auth.php';
 Route::get('/', [GoodController::class, 'index'])->name('home');
 Route::get('/good/{id}/', [GoodController::class, 'good'])->name('good');
 Route::get('/category/{id}/', [GoodController::class, 'category'])->name('category');
-
+Route::get('/about/', [GoodController::class, 'about'])->name('about');
 
 // Роуты второго курса
 // Route::get('/', function() {
@@ -37,9 +37,9 @@ Route::get('/category/{id}/', [GoodController::class, 'category'])->name('catego
 //     return view('about');
 // })->name('about');
 
-// Route::get('/contact/', function() {
-//     return view('contact');
-// })->name('contact');
+Route::get('/contact/', function() {
+    return view('contact');
+})->name('contact');
 
 // Route::get('/contact/all/{id}/', [ContactController::class, 'showOneMessage'])->name('contact-data-one');
 // Route::get('/contact/all/{id}/update/', [ContactController::class, 'updateMessage'])->name('contact-update');

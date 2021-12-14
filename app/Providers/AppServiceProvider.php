@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
+use App\Models\Good;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,8 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('*', function ($view) {
+        view()->composer('layouts.categories', function ($view) {
             $view->with(['categories' => Category::all()]);
+        });
+        view()->composer('layouts.footer', function ($view) {
+            $view->with(['randomGood' => Good::all()->random()]);
         });
     }
 }
