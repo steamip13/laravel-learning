@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        // $this->Route::middleware('auth');
+        $this->middleware('auth');
     }
 
     public function buy(int $id)
@@ -26,7 +26,7 @@ class OrderController extends Controller
         // Ищем "открытый" заказа
         $currentOrder = Order::getCurrentOrder(Auth::id());
 
-        // Если не существует "открытого" заказа
+        // Если не существует "открытого" заказа, то создаем его
         if (!$currentOrder) {
             ($currentOrder = new Order([
                 'user_id' => Auth::id(),
@@ -64,5 +64,19 @@ class OrderController extends Controller
         $currentOrder->saveAsProcessed();
 
         return view('layouts.order-process');
+    }
+
+    public function close()
+    {
+        $orderAll = Order::where('user_id', '=', Auth::id())
+        ->where('state', '=', Order::STATE_PROCESSED)
+        ->get();
+        $goodsItem = new \Illuminate\Database\Eloquent\Collection;
+        foreach ($orderAll as $item) {
+            $goodsItem = $goodsItem->merge($item->goods);
+        }
+        return view('layouts.order-close', [
+            'goods' => $goodsItem,
+        ]);
     }
 }

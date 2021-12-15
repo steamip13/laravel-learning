@@ -7,6 +7,11 @@ use App\Models\News;
 
 class NewsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function news()
     {   
         $news = News::inRandomOrder()->limit(2)->get();

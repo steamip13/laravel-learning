@@ -24,7 +24,7 @@
           <div class="product-container__content-text__price__value">
             Цена: <b>{{ $good->price }}</b>
             руб
-          </div><a href="#" class="btn btn-blue">Купить</a>
+          </div><a href="{{ route('buy', $good->id) }}" class="btn btn-blue">Купить</a>
         </div>
         <div class="product-container__content-text__description">
           {{ $good->description }}
@@ -48,7 +48,7 @@
             <div class="products-columns__item">
                 <div class="products-columns__item__title-product"><a href="{{ route('good', $good->id) }}" class="products-columns__item__title-product__link">{{ $good->title }}</a></div>
                 <div class="products-columns__item__thumbnail"><a href="{{ route('good', $good->id) }}" class="products-columns__item__thumbnail__link"><img src="/img/cover/game-{{ $good->getRandomId() }}.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                <div class="products-columns__item__description"><span class="products-price">{{ $good->price }} руб</span><a href="#" class="btn btn-blue">Купить</a></div>
+                <div class="products-columns__item__description"><span class="products-price">{{ $good->price }} руб</span><a href="{{ route('buy', $good->id) }}" class="btn btn-blue">Купить</a></div>
             </div>
         @endforeach
     </div>

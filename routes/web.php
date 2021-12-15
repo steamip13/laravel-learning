@@ -32,6 +32,7 @@ Route::get('/news/{id}/', [NewsController::class, 'detail'])->name('news-detail'
 Route::get('/order/buy/{id}/', [OrderController::class, 'buy'])->name('buy');
 Route::get('/order/current/', [OrderController::class, 'current'])->name('order-current');
 Route::get('/order/process/', [OrderController::class, 'process'])->name('order-process');
+Route::get('/my-order/', [OrderController::class, 'close'])->name('order-close');
 
 // Роуты второго курса
 // Route::get('/', function() {

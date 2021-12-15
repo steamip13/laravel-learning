@@ -8,7 +8,7 @@
             <div class="item-product__thumbnail"><a href="{{ route('good', $randomGood->id) }}" class="item-product__thumbnail__link"><img src="/img/cover/game-{{ $randomGood->getRandomId() }}.jpg" alt="Preview-image" class="item-product__thumbnail__link__img"></a></div>
             <div class="item-product__description">
               <div class="item-product__description__products-price"><span class="products-price">{{ $randomGood->price }} руб</span></div>
-              <div class="item-product__description__btn-block"><a href="#" class="btn btn-blue">Купить</a></div>
+              <div class="item-product__description__btn-block"><a href="{{ route('buy', $randomGood->id) }}" class="btn btn-blue">Купить</a></div>
             </div>
         </div>
       </div>

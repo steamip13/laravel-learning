@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Good;
 use App\Models\News;
+use App\Models\Order;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $sumGoods = 0;
+
+        view()->composer('layouts.header', function ($view) use ($sumGoods) {
+            $id = Auth::id();
+            if ($id) {
+                $currentOrder = Order::getCurrentOrder($id);
+
+                if ($currentOrder) {
+                    $sumGoods = $currentOrder->goods->count();
+                }
+            }
+
+            $view->with(['sumGoods' => $sumGoods]);
+        });
+
         view()->composer('layouts.categories', function ($view) {
             $view->with(['categories' => Category::all()]);
         });
