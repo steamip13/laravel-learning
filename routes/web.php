@@ -29,6 +29,9 @@ Route::get('/category/{id}/', [GoodController::class, 'category'])->name('catego
 Route::get('/about/', [GoodController::class, 'about'])->name('about');
 Route::get('/news/', [NewsController::class, 'news'])->name('news');
 Route::get('/news/{id}/', [NewsController::class, 'detail'])->name('news-detail');
+Route::get('/order/buy/{id}/', [OrderController::class, 'buy'])->name('buy');
+Route::get('/order/current/', [OrderController::class, 'current'])->name('order-current');
+Route::get('/order/process/', [OrderController::class, 'process'])->name('order-process');
 
 // Роуты второго курса
 // Route::get('/', function() {
