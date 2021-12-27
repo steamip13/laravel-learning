@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Good;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\OrderGood;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderCompleted;
+use App\Mail\OrderCompletedManager;
 
 class OrderController extends Controller
 {
@@ -60,7 +64,8 @@ class OrderController extends Controller
         if (!$currentOrder) {
             return redirect()->route('home');
         }
-
+        Mail::to(User::query()->find(Auth::user()->id))->send(new OrderCompleted());
+        Mail::to(User::EMAIL_ADMIN)->send(new OrderCompletedManager($currentOrder, Auth::user()));
         $currentOrder->saveAsProcessed();
 
         return view('layouts.order-process');
@@ -68,15 +73,20 @@ class OrderController extends Controller
 
     public function close()
     {
+        $orderOne = Order::where('user_id', '=', Auth::id())
+        ->where('state', '=', Order::STATE_PROCESSED)
+        ->first();
         $orderAll = Order::where('user_id', '=', Auth::id())
         ->where('state', '=', Order::STATE_PROCESSED)
         ->get();
+
         $goodsItem = new \Illuminate\Database\Eloquent\Collection;
-        foreach ($orderAll as $item) {
-            $goodsItem = $goodsItem->merge($item->goods);
-        }
+        $orderAll = $orderAll->each(function($item) use ($goodsItem) {
+            $goodsItem->push($item->goods);
+        });
+
         return view('layouts.order-close', [
-            'goods' => $goodsItem,
+            'orderAll' => $goodsItem,
         ]);
     }
 }

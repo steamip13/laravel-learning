@@ -44,4 +44,9 @@ class Order extends Model
         $this->state = self::STATE_PROCESSED;
         return $this->save();
     }
+
+    public function getRandomId()
+    {
+        return mt_rand(1, 9);   
+    }
 }

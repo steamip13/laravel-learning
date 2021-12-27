@@ -16,10 +16,6 @@ use Request;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 
 // Роутинг старого курса
@@ -33,6 +29,25 @@ Route::get('/order/buy/{id}/', [OrderController::class, 'buy'])->name('buy');
 Route::get('/order/current/', [OrderController::class, 'current'])->name('order-current');
 Route::get('/order/process/', [OrderController::class, 'process'])->name('order-process');
 Route::get('/my-order/', [OrderController::class, 'close'])->name('order-close');
+
+Route::group(['middleware' => \App\Http\Middleware\AdminMiddleware::class], function () {
+    Route::get('/admin/', [AdminController::class, 'admin'])->name('admin');
+    Route::get('/admin/categories/', [AdminController::class, 'categories'])->name('admin-categories');
+    Route::get('/admin/goods/', [AdminController::class, 'goods'])->name('admin-goods');
+    Route::get('/admin/order/', [AdminController::class, 'orderAdmin'])->name('orderAdmin');
+
+    Route::get('/admin/category/edit/{id}/', [AdminController::class, 'updateCategory'])->name('category-edit');
+    Route::post('/admin/category/update/{id}/', [AdminController::class, 'updateCategorySubmit'])->name('category-update-submit');
+    Route::get('/admin/category/delete/{id}/', [AdminController::class, 'deleteCategory'])->name('category-delete');
+    Route::get('/admin/category/add/', [AdminController::class, 'addCategory'])->name('category-add');
+    Route::post('/admin/category/add/submit/', [AdminController::class, 'addCategorySubmit'])->name('add-category-submit');
+
+    Route::get('/admin/good/edit/{id}/', [AdminController::class, 'updateGood'])->name('good-edit');
+    Route::post('/admin/good/update/{id}/', [AdminController::class, 'updateGoodSubmit'])->name('good-update-submit');
+    Route::get('/admin/good/delete/{id}/', [AdminController::class, 'deleteGood'])->name('good-delete');
+    Route::get('/admin/good/add/', [AdminController::class, 'addGood'])->name('good-add');
+    Route::post('/admin/good/add/submit/', [AdminController::class, 'addGoodSubmit'])->name('add-good-submit');
+});
 
 // Роуты второго курса
 // Route::get('/', function() {
