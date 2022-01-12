@@ -1151,6 +1151,7 @@ button {
   border-radius:5px;
   width:100%;
   transition: background-color 1s;
+  cursor: pointer;
 }
 button:hover {
   background-color: #5972ff;

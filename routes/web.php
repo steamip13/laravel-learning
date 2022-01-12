@@ -35,6 +35,7 @@ Route::group(['middleware' => \App\Http\Middleware\AdminMiddleware::class], func
     Route::get('/admin/categories/', [AdminController::class, 'categories'])->name('admin-categories');
     Route::get('/admin/goods/', [AdminController::class, 'goods'])->name('admin-goods');
     Route::get('/admin/order/', [AdminController::class, 'orderAdmin'])->name('orderAdmin');
+    Route::get('/admin/emails/', [AdminController::class, 'emails'])->name('emails');
 
     Route::get('/admin/category/edit/{id}/', [AdminController::class, 'updateCategory'])->name('category-edit');
     Route::post('/admin/category/update/{id}/', [AdminController::class, 'updateCategorySubmit'])->name('category-update-submit');
@@ -47,6 +48,12 @@ Route::group(['middleware' => \App\Http\Middleware\AdminMiddleware::class], func
     Route::get('/admin/good/delete/{id}/', [AdminController::class, 'deleteGood'])->name('good-delete');
     Route::get('/admin/good/add/', [AdminController::class, 'addGood'])->name('good-add');
     Route::post('/admin/good/add/submit/', [AdminController::class, 'addGoodSubmit'])->name('add-good-submit');
+
+    Route::get('/admin/emails/edit/{id}/', [AdminController::class, 'updateEmails'])->name('emails-edit');
+    Route::post('/admin/emails/update/{id}/', [AdminController::class, 'updateEmailsSubmit'])->name('emails-update-submit');
+    Route::get('/admin/emails/delete/{id}/', [AdminController::class, 'deleteEmails'])->name('emails-delete');
+    Route::get('/admin/emails/add/', [AdminController::class, 'addEmails'])->name('emails-add');
+    Route::post('/admin/emails/add/submit/', [AdminController::class, 'addEmailsSubmit'])->name('add-emails-submit');
 });
 
 // Роуты второго курса

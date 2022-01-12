@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Good;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\OrderGood;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderCompleted;
@@ -61,11 +62,11 @@ class OrderController extends Controller
     {
         $currentOrder = Order::getCurrentOrder(Auth::id());
 
-        if (!$currentOrder) {
-            return redirect()->route('home');
+        $emailManagerAll = Admin::all();
+        foreach($emailManagerAll as $item) {
+            Mail::to($item->email_manager)->send(new OrderCompletedManager($currentOrder, Auth::user()));
         }
         Mail::to(User::query()->find(Auth::user()->id))->send(new OrderCompleted());
-        Mail::to(User::EMAIL_ADMIN)->send(new OrderCompletedManager($currentOrder, Auth::user()));
         $currentOrder->saveAsProcessed();
 
         return view('layouts.order-process');

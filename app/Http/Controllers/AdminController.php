@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\GoodRequest;
+use App\Http\Requests\EmailRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Good;
 use App\Models\Order;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
@@ -44,7 +46,7 @@ class AdminController extends Controller
 
         $category->save();
 
-        return redirect()->route('admin-categories', $id);
+        return redirect()->route('admin-categories');
     }
 
     public function deleteCategory($id)
@@ -85,7 +87,7 @@ class AdminController extends Controller
 
         $good->save();
 
-        return redirect()->route('admin-goods', $id);
+        return redirect()->route('admin-goods');
     }
 
     public function addGood()
@@ -133,4 +135,45 @@ class AdminController extends Controller
         ]);
     }
 
+    public function emails()
+    {
+        return view('layouts.admin-emails', ['emails' => Admin::all()]);
+    }
+
+    public function updateEmails($id)
+    {
+        $email = Admin::find($id);
+        return view('layouts.update-emails', ['email' => $email]);
+    }
+
+    public function updateEmailsSubmit($id, EmailRequest $reg)
+    {
+        $email = Admin::find($id);
+        $email->email_manager = $reg->input('email');
+
+        $email->save();
+
+        return redirect()->route('emails');
+    }
+
+    public function addEmails()
+    {
+        return view('layouts.add-emails');
+    }
+
+    public function AddEmailsSubmit(EmailRequest $reg)
+    {
+        $email = new Admin();
+        $email->email_manager = $reg->input('email');
+
+        $email->save();
+
+        return redirect()->route('emails');
+    }
+
+    public function deleteEmails($id)
+    {
+        Admin::find($id)->delete();
+        return redirect()->route('emails');
+    }
 }

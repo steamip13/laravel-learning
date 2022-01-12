@@ -43,8 +43,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const EMAIL_ADMIN = 'maksimmartasov@gmail.com';
-
     public function isAdmin()
     {
         return $this->admin == 1;
